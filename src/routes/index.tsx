@@ -1,5 +1,5 @@
 import App from "@/App";
-import { task } from "@/pages/task";
+import { Task } from "@/pages/task";
 import { user } from "@/pages/user";
 import { createBrowserRouter } from "react-router";
 
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
   {
    // index: true,
    path: "task",
-    Component: task
+    Component: Task
   }
   ]
 }
