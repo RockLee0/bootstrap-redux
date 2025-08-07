@@ -1,6 +1,6 @@
 import App from "@/App";
 import { Task } from "@/pages/task";
-import { user } from "@/pages/user";
+import { User } from "@/pages/user";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
   children:[
   {
     path: "user",
-    Component: user
+    Component: User
   }
   ,
   {

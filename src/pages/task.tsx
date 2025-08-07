@@ -17,7 +17,7 @@ export function Task (){
                         <TabsTrigger value="All" onClick={()=>{dispatch(updateFilter("All")) }}>All</TabsTrigger>
                         <TabsTrigger value="High" onClick={()=>{dispatch(updateFilter("High")) }}>High</TabsTrigger>
                         <TabsTrigger value="Medium" onClick={()=>{dispatch(updateFilter("Medium")) }}>Medium</TabsTrigger>
-                        <TabsTrigger value="Low">Low</TabsTrigger>
+                        <TabsTrigger value="Low" onClick={()=>{dispatch(updateFilter("Low")) }}>Low</TabsTrigger>
                     </TabsList>
                 </Tabs>
             </div>
