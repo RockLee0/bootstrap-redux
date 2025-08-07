@@ -4,6 +4,7 @@ export interface ITask{
   description: string
   isCompleted: boolean
   priority: "High" | "Low" | "Medium" | "All"
+  user:string | null
   dueDate: Date
 }
 

@@ -22,7 +22,7 @@ import { DialogClose } from "@radix-ui/react-dialog"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { addTask } from "@/redux/features/task/taskSlice"
 import type { ITask } from "@/types"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -31,11 +31,13 @@ import { cn } from "@/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { formatDate } from "date-fns"
+import { selectUsers } from "@/redux/features/user/userSlice"
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
   priority: z.string(),
+  user: z.string().optional(),
   dueDate: z.date() 
 })
 
@@ -46,12 +48,13 @@ export function AddTaskModal() {
       title: "",
       description: "",
       priority: "",
+      user:"",
       dueDate: new Date()
     },
   })
 
   const dispatch = useAppDispatch();
-
+  const users = useAppSelector(selectUsers)
   const onSubmit : SubmitHandler<FieldValues> = (data: z.infer<typeof formSchema>) => {
     dispatch(addTask(data as ITask))
     console.log("Submitted Task:", data)
@@ -111,6 +114,28 @@ export function AddTaskModal() {
                   <SelectItem value="High">High</SelectItem>
                   <SelectItem value="Low">Low</SelectItem>
                   <SelectItem value="Medium">Medium</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+
+            <FormField
+          control={form.control}
+          name="user"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>User</FormLabel>
+              <Select  onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select User" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                    {
+                    users.map(user=>(<SelectItem value={user.name}>{user.name}</SelectItem>))
+                    }
                 </SelectContent>
               </Select>
             </FormItem>

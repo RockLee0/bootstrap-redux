@@ -13,7 +13,7 @@ tasks: [],
 filter: "High"
 }
 
-export type draftTask = Pick<ITask, "title" | "description" | "priority" | "dueDate">
+export type draftTask = Pick<ITask, "title" | "description" | "priority" | "user" |"dueDate">
 const createData = (data: draftTask ): ITask =>{
     return ({
         id: nanoid(),
